@@ -46,16 +46,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Image upload
     $imagePath = null;
     if (!empty($_FILES['image']['name'])) {
+        $uploadError = $_FILES['image']['error'] ?? UPLOAD_ERR_OK;
         $ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
         $allowed = ['jpg','jpeg','png','webp'];
-        if (!in_array($ext, $allowed)) {
+        $uploadDir = __DIR__ . '/../uploads/';
+
+        if ($uploadError !== UPLOAD_ERR_OK) {
+            $errors[] = 'Le fichier image n\'a pas pu etre televerse correctement.';
+        } elseif (!in_array($ext, $allowed)) {
             $errors[] = 'Format d\'image non autorisé (jpg, jpeg, png, webp).';
         } elseif ($_FILES['image']['size'] > 5 * 1024 * 1024) {
             $errors[] = 'L\'image ne doit pas dépasser 5 Mo.';
         } else {
             $filename  = uniqid('img_') . '.' . $ext;
-            $uploadDir = '/var/www/html/public/uploads/';
-            if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir . $filename)) {
+
+            if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true)) {
+                $errors[] = 'Impossible de creer le dossier uploads.';
+            } elseif (!is_writable($uploadDir)) {
+                $errors[] = 'Le dossier uploads n\'est pas inscriptible.';
+            } elseif (move_uploaded_file($_FILES['image']['tmp_name'], $uploadDir . $filename)) {
                 $imagePath = '/uploads/' . $filename;
             } else {
                 $errors[] = 'Erreur lors du téléchargement de l\'image.';

@@ -25,10 +25,10 @@ RUN echo '<Directory /var/www/html/public>\n    Options Indexes FollowSymLinks\n
 COPY . /var/www/html/
 
 # Create and secure uploads directory
-RUN mkdir -p /var/www/html/uploads \
+RUN mkdir -p /var/www/html/public/uploads \
     && chown -R www-data:www-data /var/www/html \
     && find /var/www/html -type d -exec chmod 755 {} \; \
     && find /var/www/html -type f -exec chmod 644 {} \; \
-    && chmod -R 775 /var/www/html/uploads
+    && chmod -R 775 /var/www/html/public/uploads
 
 EXPOSE 80

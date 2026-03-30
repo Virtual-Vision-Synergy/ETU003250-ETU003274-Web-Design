@@ -38,6 +38,11 @@ services:
       DB_USER: newsuser
       DB_PASS: newspass
       SITE_URL: http://localhost:8080
+    command: >
+      sh -c "mkdir -p /var/www/html/public/uploads
+      && chown -R www-data:www-data /var/www/html/public/uploads
+      && chmod -R 775 /var/www/html/public/uploads
+      && apache2-foreground"
     volumes:
       - uploads_data:/var/www/html/public/uploads
     networks:
@@ -63,6 +68,11 @@ services:
       FRONT_URL: http://localhost:8080
       ADMIN_USER: admin
       ADMIN_PASS: admin123
+    command: >
+      sh -c "mkdir -p /var/www/html/public/uploads
+      && chown -R www-data:www-data /var/www/html/public/uploads
+      && chmod -R 775 /var/www/html/public/uploads
+      && apache2-foreground"
     volumes:
       - uploads_data:/var/www/html/public/uploads
     networks:
