@@ -1,0 +1,20 @@
+Options -Indexes
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+
+# Block direct access to sensitive dirs
+RewriteRule ^includes/ - [F,L]
+
+# Allow existing files/dirs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Route everything through index.php
+RewriteRule ^(.*)$ index.php?_route=$1 [QSA,L]
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+</IfModule>

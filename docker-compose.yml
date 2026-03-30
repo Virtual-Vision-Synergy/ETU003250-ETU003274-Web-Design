@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: iran_news_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: newsdb
+      MYSQL_USER: newsuser
+      MYSQL_PASSWORD: newspass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - news_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "newsuser", "-pnewspass"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontoffice:
+    build:
+      context: ./frontoffice
+      dockerfile: Dockerfile
+    container_name: iran_news_front
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: newsdb
+      DB_USER: newsuser
+      DB_PASS: newspass
+      SITE_URL: http://localhost:8080
+    volumes:
+      - uploads_data:/var/www/html/public/uploads
+    networks:
+      - news_network
+
+  backoffice:
+    build:
+      context: ./backoffice
+      dockerfile: Dockerfile
+    container_name: iran_news_back
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: newsdb
+      DB_USER: newsuser
+      DB_PASS: newspass
+      SITE_URL: http://localhost:8081
+      FRONT_URL: http://localhost:8080
+      ADMIN_USER: admin
+      ADMIN_PASS: admin123
+    volumes:
+      - uploads_data:/var/www/html/public/uploads
+    networks:
+      - news_network
+
+networks:
+  news_network:
+    driver: bridge
+
+volumes:
+  db_data:
+  uploads_data:
