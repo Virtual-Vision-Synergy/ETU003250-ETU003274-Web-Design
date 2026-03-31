@@ -55,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Le fichier image n\'a pas pu etre televerse correctement.';
         } elseif (!in_array($ext, $allowed)) {
             $errors[] = 'Format d\'image non autorisé (jpg, jpeg, png, webp).';
-        } elseif ($_FILES['image']['size'] > 5 * 1024 * 1024) {
-            $errors[] = 'L\'image ne doit pas dépasser 5 Mo.';
+        } elseif ($_FILES['image']['size'] > 10 * 1024 * 1024) {
+            $errors[] = 'L\'image ne doit pas dépasser 10 Mo.';
         } else {
             $filename  = uniqid('img_') . '.' . $ext;
 

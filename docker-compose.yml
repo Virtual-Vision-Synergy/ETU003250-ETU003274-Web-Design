@@ -23,8 +23,8 @@ services:
 
   frontoffice:
     build:
-      context: ./frontoffice
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./frontoffice/Dockerfile
     container_name: iran_news_front
     restart: unless-stopped
     ports:
@@ -50,8 +50,8 @@ services:
 
   backoffice:
     build:
-      context: ./backoffice
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./backoffice/Dockerfile
     container_name: iran_news_back
     restart: unless-stopped
     ports:

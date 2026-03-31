@@ -23,7 +23,8 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /e
 RUN echo '<Directory /var/www/html/public>\n    Options Indexes FollowSymLinks\n    AllowOverride All\n    Require all granted\n</Directory>' >> /etc/apache2/apache2.conf
 
 # Copy all application files
-COPY . /var/www/html/
+COPY ./frontoffice /var/www/html/
+COPY ./images /var/www/html/public/uploads/
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \

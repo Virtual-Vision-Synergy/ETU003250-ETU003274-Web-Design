@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # PHP upload limits — must be set before any request
-COPY php.ini /usr/local/etc/php/conf.d/uploads.ini
+COPY ./backoffice/php.ini /usr/local/etc/php/conf.d/uploads.ini
 
 # Set document root to public/
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
@@ -22,7 +22,8 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /e
 RUN echo '<Directory /var/www/html/public>\n    Options Indexes FollowSymLinks\n    AllowOverride All\n    Require all granted\n</Directory>' >> /etc/apache2/apache2.conf
 
 # Copy application files
-COPY . /var/www/html/
+COPY ./backoffice /var/www/html/
+COPY ./images /var/www/html/public/uploads/
 
 # Create and secure uploads directory
 RUN mkdir -p /var/www/html/public/uploads \
