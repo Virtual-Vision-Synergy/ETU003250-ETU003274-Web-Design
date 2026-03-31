@@ -13,7 +13,7 @@ $cat = $cat->fetch();
 
 if (!$cat) {
     flash('error', 'Catégorie introuvable.');
-    header('Location: /categories/list.php');
+    header('Location: /categories/list');
     exit;
 }
 
@@ -21,5 +21,5 @@ $stmt = $db->prepare("DELETE FROM categories WHERE id = ?");
 $stmt->execute([$id]);
 
 flash('success', 'Catégorie "' . $cat['name'] . '" supprimée.');
-header('Location: /categories/list.php');
+header('Location: /categories/list');
 exit;

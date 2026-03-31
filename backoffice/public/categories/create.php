@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':description' => $formData['description'],
         ]);
         flash('success', 'Catégorie "' . $formData['name'] . '" créée avec succès.');
-        header('Location: /categories/list.php');
+        header('Location: /categories/list');
         exit;
     }
 }
@@ -49,7 +49,7 @@ require_once __DIR__ . '/../../includes/header.php';
 <div class="admin-content">
     <div class="admin-page-header">
         <h1 class="admin-page-title"><i class="fa-solid fa-folder-plus"></i> Nouvelle catégorie</h1>
-        <a href="/categories/list.php" class="btn btn--outline">
+        <a href="/categories" class="btn btn--outline">
             <i class="fa-solid fa-arrow-left"></i> Retour
         </a>
     </div>
@@ -93,7 +93,7 @@ require_once __DIR__ . '/../../includes/header.php';
                     <button type="submit" class="btn btn--primary">
                         <i class="fa-solid fa-floppy-disk"></i> Enregistrer
                     </button>
-                    <a href="/categories/list.php" class="btn btn--outline">Annuler</a>
+                    <a href="/categories" class="btn btn--outline">Annuler</a>
                 </div>
             </form>
         </div>

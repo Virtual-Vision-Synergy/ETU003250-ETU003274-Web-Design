@@ -13,7 +13,7 @@ $article = $article->fetch();
 
 if (!$article) {
     flash('error', 'Article introuvable.');
-    header('Location: /articles/list.php');
+    header('Location: /articles/list');
     exit;
 }
 
@@ -21,5 +21,5 @@ $stmt = $db->prepare("DELETE FROM articles WHERE id = ?");
 $stmt->execute([$id]);
 
 flash('success', 'Article "' . $article['title'] . '" supprimé.');
-header('Location: /articles/list.php');
+header('Location: /articles/list');
 exit;

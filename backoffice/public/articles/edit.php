@@ -13,7 +13,7 @@ $article = $article->fetch();
 
 if (!$article) {
     flash('error', 'Article introuvable.');
-    header('Location: /articles/list.php');
+    header('Location: /articles/list');
     exit;
 }
 
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id'           => $id,
         ]);
         flash('success', 'Article modifié avec succès.');
-        header('Location: /articles/list.php');
+        header('Location: /articles/list');
         exit;
     }
 }
@@ -111,7 +111,7 @@ require_once __DIR__ . '/../../includes/header.php';
 <div class="admin-content">
     <div class="admin-page-header">
         <h1 class="admin-page-title"><i class="fa-solid fa-pen-to-square"></i> Modifier l'article</h1>
-        <a href="/articles/list.php" class="btn btn--outline">
+        <a href="/articles" class="btn btn--outline">
             <i class="fa-solid fa-arrow-left"></i> Retour
         </a>
     </div>

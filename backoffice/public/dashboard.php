@@ -82,13 +82,13 @@ require_once __DIR__ . '/../includes/header.php';
 
     <!-- Quick actions -->
     <div class="quick-actions">
-        <a href="/articles/create.php" class="btn btn--primary">
+        <a href="/articles/create" class="btn btn--primary">
             <i class="fa-solid fa-plus"></i> Nouvel article
         </a>
-        <a href="/categories/create.php" class="btn btn--secondary">
+        <a href="/categories/create" class="btn btn--secondary">
             <i class="fa-solid fa-folder-plus"></i> Nouvelle catégorie
         </a>
-        <a href="/articles/list.php" class="btn btn--outline">
+        <a href="/articles" class="btn btn--outline">
             <i class="fa-solid fa-list"></i> Tous les articles
         </a>
     </div>
@@ -99,7 +99,7 @@ require_once __DIR__ . '/../includes/header.php';
             <h2 class="admin-card__title">
                 <i class="fa-solid fa-clock-rotate-left"></i> Articles récents
             </h2>
-            <a href="/articles/list.php" class="btn btn--sm btn--outline">
+            <a href="/articles" class="btn btn--sm btn--outline">
                 Voir tout <i class="fa-solid fa-arrow-right"></i>
             </a>
         </div>
@@ -133,10 +133,10 @@ require_once __DIR__ . '/../includes/header.php';
                         </td>
                         <td><?= formatDate($art['published_at']) ?></td>
                         <td class="td-actions">
-                            <a href="/articles/edit.php?id=<?= $art['id'] ?>" class="action-btn action-btn--edit" title="Modifier">
+                            <a href="/articles/edit/<?= $art['id'] ?>" class="action-btn action-btn--edit" title="Modifier">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a href="/articles/delete.php?id=<?= $art['id'] ?>" class="action-btn action-btn--delete" title="Supprimer"
+                            <a href="/articles/delete/<?= $art['id'] ?>" class="action-btn action-btn--delete" title="Supprimer"
                                onclick="return confirm('Supprimer cet article ?')">
                                 <i class="fa-solid fa-trash"></i>
                             </a>

@@ -6,13 +6,44 @@ RewriteBase /
 # Block direct access to sensitive dirs
 RewriteRule ^includes/ - [F,L]
 
-# Allow existing files/dirs
+# ─── Backoffice URL Rewriting ───────────────────────────────────────────────
+
+# dashboard → /dashboard
+RewriteRule ^dashboard/?$ dashboard.php [L]
+
+# logout → /logout
+RewriteRule ^logout/?$ logout.php [L]
+
+# articles/list → /articles
+RewriteRule ^articles/?$ articles/list.php [L]
+
+# articles/create → /articles/create
+RewriteRule ^articles/create/?$ articles/create.php [L]
+
+# articles/edit/123 → /articles/edit?id=123
+RewriteRule ^articles/edit/([0-9]+)/?$ articles/edit.php?id=$1 [QSA,L]
+
+# articles/delete/123 → /articles/delete?id=123
+RewriteRule ^articles/delete/([0-9]+)/?$ articles/delete.php?id=$1 [QSA,L]
+
+# categories/list → /categories
+RewriteRule ^categories/?$ categories/list.php [L]
+
+# categories/create → /categories/create
+RewriteRule ^categories/create/?$ categories/create.php [L]
+
+# categories/edit/123 → /categories/edit?id=123
+RewriteRule ^categories/edit/([0-9]+)/?$ categories/edit.php?id=$1 [QSA,L]
+
+# categories/delete/123 → /categories/delete?id=123
+RewriteRule ^categories/delete/([0-9]+)/?$ categories/delete.php?id=$1 [QSA,L]
+
+# ─── Fallback : fichiers/dossiers existants ──────────────────────────────────
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Route everything through index.php
 RewriteRule ^(.*)$ index.php?_route=$1 [QSA,L]
 
+# ─── Security Headers ────────────────────────────────────────────────────────
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"

@@ -34,7 +34,7 @@ $adminSiteTitle = 'Iran Conflit — Administration';
         <div class="sidebar__section-label">Navigation</div>
         <ul>
             <li>
-                <a href="/dashboard.php" <?= (basename($_SERVER['PHP_SELF']) === 'dashboard.php') ? 'class="active"' : '' ?>>
+                <a href="/dashboard" <?= (basename($_SERVER['PHP_SELF']) === 'dashboard') ? 'class="active"' : '' ?>>
                     <i class="fa-solid fa-gauge-high"></i> Tableau de bord
                 </a>
             </li>
@@ -43,12 +43,12 @@ $adminSiteTitle = 'Iran Conflit — Administration';
         <div class="sidebar__section-label">Contenu</div>
         <ul>
             <li>
-                <a href="/articles/list.php" <?= (strpos($_SERVER['PHP_SELF'] ?? '', 'articles') !== false) ? 'class="active"' : '' ?>>
+                <a href="/articles" <?= (strpos($_SERVER['PHP_SELF'] ?? '', 'articles') !== false) ? 'class="active"' : '' ?>>
                     <i class="fa-solid fa-newspaper"></i> Articles
                 </a>
             </li>
             <li>
-                <a href="/categories/list.php" <?= (strpos($_SERVER['PHP_SELF'] ?? '', 'categories') !== false) ? 'class="active"' : '' ?>>
+                <a href="/categories" <?= (strpos($_SERVER['PHP_SELF'] ?? '', 'categories') !== false) ? 'class="active"' : '' ?>>
                     <i class="fa-solid fa-folder-open"></i> Catégories
                 </a>
             </li>
@@ -62,7 +62,7 @@ $adminSiteTitle = 'Iran Conflit — Administration';
                 </a>
             </li>
             <li>
-                <a href="/logout.php">
+                <a href="/logout">
                     <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
                 </a>
             </li>

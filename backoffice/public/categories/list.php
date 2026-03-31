@@ -23,7 +23,7 @@ require_once __DIR__ . '/../../includes/header.php';
 <div class="admin-content">
     <div class="admin-page-header">
         <h1 class="admin-page-title"><i class="fa-solid fa-folder-open"></i> Catégories</h1>
-        <a href="/categories/create.php" class="btn btn--primary">
+        <a href="/categories/create" class="btn btn--primary">
             <i class="fa-solid fa-folder-plus"></i> Nouvelle catégorie
         </a>
     </div>
@@ -62,10 +62,10 @@ require_once __DIR__ . '/../../includes/header.php';
                             </span>
                         </td>
                         <td class="td-actions">
-                            <a href="/categories/edit.php?id=<?= $cat['id'] ?>" class="action-btn action-btn--edit" title="Modifier">
+                            <a href="/categories/edit/<?= $cat['id'] ?>" class="action-btn action-btn--edit" title="Modifier">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <a href="/categories/delete.php?id=<?= $cat['id'] ?>"
+                            <a href="/categories/delete/<?= $cat['id'] ?>"
                                class="action-btn action-btn--delete" title="Supprimer"
                                onclick="return confirm('Supprimer cette catégorie ? Les articles associés perdront leur catégorie.')">
                                 <i class="fa-solid fa-trash"></i>

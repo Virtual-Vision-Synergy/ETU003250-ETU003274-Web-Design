@@ -9,7 +9,7 @@ $adminPass = $_ENV['ADMIN_PASS'] ?? getenv('ADMIN_PASS') ?: 'admin123';
 
 // Already logged in
 if (isLoggedIn()) {
-    header('Location: /dashboard.php');
+    header('Location: /dashboard');
     exit;
 }
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_regenerate_id(true);
         $_SESSION['admin_logged_in'] = true;
         $_SESSION['admin_user']      = $user;
-        header('Location: /dashboard.php');
+        header('Location: /dashboard');
         exit;
     } else {
         $error = 'Identifiants incorrects. Veuillez réessayer.';

@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':is_published' => $formData['is_published'],
         ]);
         flash('success', 'Article créé avec succès.');
-        header('Location: /articles/list.php');
+        header('Location: /articles/list');
         exit;
     }
 }
@@ -99,7 +99,7 @@ require_once __DIR__ . '/../../includes/header.php';
 <div class="admin-content">
     <div class="admin-page-header">
         <h1 class="admin-page-title"><i class="fa-solid fa-plus"></i> Nouvel article</h1>
-        <a href="/articles/list.php" class="btn btn--outline">
+        <a href="/articles" class="btn btn--outline">
             <i class="fa-solid fa-arrow-left"></i> Retour
         </a>
     </div>
