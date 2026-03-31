@@ -5,6 +5,8 @@ services:
     image: mysql:8.0
     container_name: iran_news_db
     restart: unless-stopped
+    ports:
+      - "3306:3306"   # ← ajouter cette ligne
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: newsdb
